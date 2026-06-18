@@ -15,7 +15,7 @@ create table product(
         supplier_id bigint references supplier(id) on delete set null,
         name varchar(100),
         description varchar(255),
-        price decimal(5, 2) not null default 0.0
+        price decimal(10, 2) not null default 0.0
 );
 
 create table stock(
@@ -34,7 +34,7 @@ create table shipment(
 create table customer_order(
     id bigserial primary key,
     shipment_id bigint references shipment(id) on delete set null,
-    total_price decimal(7, 2)
+    total_price decimal(10, 2)
 );
 
 create table order_items(
@@ -42,5 +42,5 @@ create table order_items(
     order_id bigint references customer_order(id) on delete cascade,
     product_id bigint references product(id) on delete set null,
     quantity int,
-    price_at_shipment decimal(5,2)
+    price_at_shipment decimal(10,2)
 );

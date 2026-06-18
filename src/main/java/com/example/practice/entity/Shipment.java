@@ -1,0 +1,50 @@
+package com.example.practice.entity;
+
+import com.example.practice.entity.enums.ShipmentStatus;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+
+@Entity
+@Table(name = "shipment")
+@NoArgsConstructor
+@Getter
+@Setter
+public class Shipment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pickup_point_id")
+    private PickupPoint pickupPoint;
+
+    @OneToMany(mappedBy = "shipment")
+    private List<Order> customerOrders;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private ShipmentStatus status;
+
+    @Column(name = "created_at")
+    private LocalDate createdAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Shipment shipment = (Shipment) o;
+        return Objects.equals(id, shipment.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+}
