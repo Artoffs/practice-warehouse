@@ -51,14 +51,14 @@ INSERT INTO stock (product_id, quantity) VALUES
 
 -- 5. Отгрузки (shipments)
 INSERT INTO shipment (pickup_point_id, status, created_at) VALUES
-                                                               (1, 'Доставлено', '2026-01-10'),
-                                                               (2, 'В пути', '2026-01-15'),
-                                                               (3, 'Ожидание', '2026-01-20'),
-                                                               (4, 'Доставлено', '2026-01-25'),
-                                                               (5, 'Отменен', '2026-02-01'),
-                                                               (1, 'Доставлено', '2026-02-05'),
-                                                               (2, 'В пути', '2026-02-10'),
-                                                               (3, 'Ожидание', '2026-02-15');
+                                                               (1, 'CREATED', '2026-01-10'),
+                                                               (2, 'CREATED', '2026-01-15'),
+                                                               (3, 'CREATED', '2026-01-20'),
+                                                               (4, 'CREATED', '2026-01-25'),
+                                                               (5, 'CREATED', '2026-02-01'),
+                                                               (1, 'CREATED', '2026-02-05'),
+                                                               (2, 'CREATED', '2026-02-10'),
+                                                               (3, 'CREATED', '2026-02-15');
 
 -- 6. Заказы клиентов
 INSERT INTO customer_order (shipment_id, total_price) VALUES
