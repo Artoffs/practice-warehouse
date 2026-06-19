@@ -1,6 +1,7 @@
 package com.example.practice.entity;
 
 import com.example.practice.entity.enums.ShipmentStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,10 +25,11 @@ public class Shipment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pickup_point_id")
-    private PickupPoint pickupPoint;
+    private PickupPoint pickUpPoint;
 
-    @OneToMany(mappedBy = "shipment")
-    private List<Order> customerOrders;
+    @OneToMany(mappedBy = "shipment", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Order> orders;
 
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")

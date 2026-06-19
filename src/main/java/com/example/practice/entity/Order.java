@@ -1,5 +1,6 @@
 package com.example.practice.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +25,11 @@ public class Order {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipment_id")
+    @JsonManagedReference
     private Shipment shipment;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Column(name = "total_price")
