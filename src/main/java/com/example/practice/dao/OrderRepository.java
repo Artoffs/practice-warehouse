@@ -11,7 +11,10 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT DISTINCT o FROM Order o " +
-            "JOIN FETCH o.shipment " +
-            "JOIN FETCH o.orderItems")
-    List<Order> findAllWithDependencies();
+            "JOIN FETCH o.shipment s " +
+            "JOIN FETCH s.pickUpPoint pp " +
+            "JOIN FETCH o.orderItems oi " +
+            "JOIN FETCH oi.product p " +
+            "JOIN FETCH p.supplier sup")
+    List<Order> findAllWithAllDependencies();
 }

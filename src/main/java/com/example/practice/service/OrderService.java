@@ -19,7 +19,7 @@ public class OrderService {
     }
 
     public List<Order> getAll(){
-        return orderRepository.findAllWithDependencies();
+        return orderRepository.findAllWithAllDependencies();
     }
 
     public Order getById(Long id) {

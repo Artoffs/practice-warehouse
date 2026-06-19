@@ -23,6 +23,6 @@ public class OrderItemService {
     }
 
     public List<OrderItem> getAll(){
-        return orderItemRepository.findAll();
+        return orderItemRepository.getAllWithDeps();
     }
 }
