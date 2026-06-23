@@ -28,7 +28,6 @@ public class OrderMapper {
 
         return new OrderResponse(
                 itemResponses,
-                order.getShipment().getCreatedAt() != null ? order.getShipment().getCreatedAt() : null,
                 order.getTotalPrice().doubleValue()
         );
     }

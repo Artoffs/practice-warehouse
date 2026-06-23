@@ -1,13 +1,21 @@
 package com.example.practice.service;
 
+import com.example.practice.dao.OrderItemRepository;
 import com.example.practice.dao.OrderRepository;
+import com.example.practice.dao.ProductRepository;
 import com.example.practice.dto.mapper.OrderMapper;
+import com.example.practice.dto.order.OrderCreateRequest;
+import com.example.practice.dto.order.OrderItemRequest;
 import com.example.practice.dto.order.OrderResponse;
 import com.example.practice.entity.Order;
+import com.example.practice.entity.OrderItem;
+import com.example.practice.entity.Product;
 import com.example.practice.exceptionHandler.order.NoSuchOrderException;
+import com.example.practice.exceptionHandler.product.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +24,13 @@ import java.util.Optional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final ProductRepository productRepository;
     private final OrderMapper orderMapper;
 
     public List<OrderResponse> getAll(){
-        return orderRepository.findAllWithAllDependencies().stream()
-                .map(orderMapper::toOrderResponse).toList();
+        List<Order> allWithAllDependencies = orderRepository.findAllWithAllDependencies();
+        return orderMapper.toOrderResponseList(allWithAllDependencies);
     }
 
     public OrderResponse getById(Long id) {
@@ -28,5 +38,40 @@ public class OrderService {
         return byId.map(orderMapper::toOrderResponse)
                 .orElseThrow(() -> new NoSuchOrderException("Order with id=" + id
                         + " not found"));
+    }
+
+    public OrderResponse save(OrderCreateRequest request) {
+
+        Order order = new Order();
+
+        List<OrderItem> list = request.items()
+                .stream()
+                .map(orderItemRequest -> {
+                    OrderItem orderItem = createOrderItem(orderItemRequest);
+                    order.addItem(orderItem);
+                return orderItem;})
+                .toList();
+
+        order.setTotalPrice(list
+                .stream()
+                .map(OrderItem::getPriceAtShipment)
+                .reduce(BigDecimal.ZERO, BigDecimal::add));
+
+        orderRepository.save(order);
+        orderItemRepository.saveAll(list);
+
+        return orderMapper.toOrderResponse(order);
+    }
+
+    private OrderItem createOrderItem(OrderItemRequest orderItemRequest) {
+        Product product = productRepository.findById(orderItemRequest.productId()).orElseThrow(() ->
+                new ProductNotFoundException("Продукт с таким айди не найден"));
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setQuantity(orderItemRequest.quantity());
+        orderItem.setPriceAtShipment(product.getPrice());
+        orderItem.setProduct(product);
+
+        return orderItem;
     }
 }
