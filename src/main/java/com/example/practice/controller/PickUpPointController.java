@@ -2,6 +2,7 @@ package com.example.practice.controller;
 
 import com.example.practice.entity.PickupPoint;
 import com.example.practice.service.PickUpPointService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,21 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/pickuppoints")
+@RequiredArgsConstructor
 public class PickUpPointController {
 
     private final PickUpPointService pickUpPointService;
 
-    public PickUpPointController(PickUpPointService pickUpPointService) {
-        this.pickUpPointService = pickUpPointService;
-    }
-
-    @GetMapping("/pickuppoints/{id}")
-    public PickupPoint pickupPoint(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public PickupPoint getById(@PathVariable Long id) {
         return pickUpPointService.getById(id);
     }
-    @GetMapping("/pickuppoints")
-    public List<PickupPoint> pickupPoints() {
+    @GetMapping
+    public List<PickupPoint> getAll() {
         return pickUpPointService.getAll();
     }
 }

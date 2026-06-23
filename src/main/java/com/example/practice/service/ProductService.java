@@ -1,8 +1,12 @@
 package com.example.practice.service;
 
 import com.example.practice.dao.ProductRepository;
+import com.example.practice.dto.product.ProductRequest;
+import com.example.practice.dto.product.ProductResponse;
+import com.example.practice.dto.mapper.ProductMapper;
+import com.example.practice.dto.product.ProductRequest;
 import com.example.practice.entity.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.practice.exceptionHandler.product.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,18 +17,26 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
-    public Product getById(Long id) {
+    public ProductResponse getById(Long id) {
         Optional<Product> byId = productRepository.findById(id);
-        return byId.orElseThrow();
+        return byId.map(productMapper::toResponse).orElseThrow(() -> new ProductNotFoundException("Product with id="
+                + id +
+                " not found"));
     }
+
 
     public Page<Product> getAll(Pageable pageable) {
         return productRepository.findAll(pageable);
+    }
+
+    public Product save(ProductRequest request) {
+        return productRepository.save(productMapper.toEntity(request));
     }
 }
