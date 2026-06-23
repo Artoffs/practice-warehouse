@@ -14,4 +14,5 @@ public class OrderGlobalExceptionHandler {
         orderInvalidData.setInfo(e.getMessage());
         return new ResponseEntity<>(orderInvalidData, HttpStatus.BAD_REQUEST);
     }
+
 }

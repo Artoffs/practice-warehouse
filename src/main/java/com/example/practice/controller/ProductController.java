@@ -3,6 +3,7 @@ package com.example.practice.controller;
 import com.example.practice.dto.product.ProductResponse;
 import com.example.practice.entity.Product;
 import com.example.practice.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.Page;
@@ -39,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product save(@Validated @RequestBody ProductRequest request) {
+    public Product save(@Valid @RequestBody ProductRequest request) {
         return productService.save(request);
     }
 }
