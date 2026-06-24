@@ -1,6 +1,6 @@
 package com.example.practice.controller;
 
-import com.example.practice.dto.order.OrderCreateRequest;
+import com.example.practice.dto.order.CreateOrderRequest;
 import com.example.practice.dto.order.OrderProjection;
 import com.example.practice.dto.order.OrderResponse;
 import com.example.practice.service.OrderService;
@@ -37,7 +37,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> create(@Valid @RequestBody OrderCreateRequest request) {
+    public ResponseEntity<OrderResponse> create(@Valid @RequestBody CreateOrderRequest request) {
         OrderResponse order = orderService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }

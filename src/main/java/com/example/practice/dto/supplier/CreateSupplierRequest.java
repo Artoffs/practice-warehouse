@@ -3,7 +3,7 @@ package com.example.practice.dto.supplier;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public record SupplierRequest (
+public record CreateSupplierRequest(
         @NotBlank
         String name,
         @Email @NotBlank

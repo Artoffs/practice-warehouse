@@ -2,9 +2,11 @@ package com.example.practice.service;
 
 import com.example.practice.dao.SupplierRepository;
 import com.example.practice.dto.mapper.SupplierMapper;
-import com.example.practice.dto.supplier.SupplierRequest;
+import com.example.practice.dto.supplier.PatchSupplierRequest;
+import com.example.practice.dto.supplier.CreateSupplierRequest;
 import com.example.practice.entity.Supplier;
 import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +30,25 @@ public class SupplierService {
         return supplierRepository.findAll();
     }
 
-    public Supplier save(SupplierRequest request) {
+    public Supplier save(CreateSupplierRequest request) {
         return supplierRepository.save(supplierMapper.toEntity(request));
+    }
+
+    @Transactional
+    public Supplier update(Long id, PatchSupplierRequest request) {
+        Supplier supplier = supplierRepository.findById(id).orElseThrow(() ->
+                new NoSuchSupplierException("Поставщика с таким айди не найдено"));
+
+        if(request.name() != null) {
+           supplier.setName(request.name());
+        }
+        if(request.email() != null) {
+            supplier.setEmail(request.email());
+        }
+        if(request.phone() != null) {
+            supplier.setPhone(request.phone());
+        }
+
+        return supplier;
     }
 }

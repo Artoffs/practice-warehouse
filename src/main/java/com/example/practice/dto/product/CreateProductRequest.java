@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record ProductRequest(
+public record CreateProductRequest(
         @NotNull(message = "Поставщик обязателен")
         Long supplierId,
         @NotBlank(message = "Укажите название товара")

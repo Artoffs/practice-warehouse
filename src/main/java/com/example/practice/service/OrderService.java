@@ -4,7 +4,7 @@ import com.example.practice.dao.OrderItemRepository;
 import com.example.practice.dao.OrderRepository;
 import com.example.practice.dao.ProductRepository;
 import com.example.practice.dto.mapper.OrderMapper;
-import com.example.practice.dto.order.OrderCreateRequest;
+import com.example.practice.dto.order.CreateOrderRequest;
 import com.example.practice.dto.order.OrderProjection;
 import com.example.practice.dto.order.OrderResponse;
 import com.example.practice.dto.order.orderitem.OrderItemRequest;
@@ -41,7 +41,7 @@ public class OrderService {
                 .orElseThrow(() -> new NoSuchOrderException("Заказ с таким айди не найден"));
     }
 
-    public OrderResponse save(OrderCreateRequest request) {
+    public OrderResponse save(CreateOrderRequest request) {
 
         Order order = new Order();
 

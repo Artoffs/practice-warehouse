@@ -14,7 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("""
         SELECT new com.example.practice.dto.product.ProductProjection (
-                s.name, p.name, p.description, p.price
+                p.id, s.name, p.name, p.description, p.price
                 )
         FROM Product p
         JOIN p.supplier s

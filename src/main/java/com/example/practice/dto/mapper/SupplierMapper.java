@@ -1,13 +1,13 @@
 package com.example.practice.dto.mapper;
 
-import com.example.practice.dto.supplier.SupplierRequest;
+import com.example.practice.dto.supplier.CreateSupplierRequest;
 import com.example.practice.entity.Supplier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SupplierMapper {
 
-    public Supplier toEntity(SupplierRequest request) {
+    public Supplier toEntity(CreateSupplierRequest request) {
 
         Supplier supplier = new Supplier();
 

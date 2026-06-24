@@ -4,7 +4,7 @@ import com.example.practice.dto.order.orderitem.OrderItemRequest;
 
 import java.util.List;
 
-public record OrderCreateRequest(
+public record CreateOrderRequest(
         List<OrderItemRequest> items
 ) {
 }
