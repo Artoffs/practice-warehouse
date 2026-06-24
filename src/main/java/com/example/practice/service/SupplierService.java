@@ -4,6 +4,7 @@ import com.example.practice.dao.SupplierRepository;
 import com.example.practice.dto.mapper.SupplierMapper;
 import com.example.practice.dto.supplier.SupplierRequest;
 import com.example.practice.entity.Supplier;
+import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class SupplierService {
 
     public Supplier getById(Long id) {
         Optional<Supplier> byId = supplierRepository.findById(id);
-        return byId.orElseThrow();
+        return byId.orElseThrow(() ->
+                new NoSuchSupplierException("Поставщик с таким айди не найден"));
     }
 
     public List<Supplier> getAll() {

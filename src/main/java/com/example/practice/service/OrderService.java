@@ -12,7 +12,7 @@ import com.example.practice.entity.Order;
 import com.example.practice.entity.OrderItem;
 import com.example.practice.entity.Product;
 import com.example.practice.exceptionHandler.order.NoSuchOrderException;
-import com.example.practice.exceptionHandler.product.ProductNotFoundException;
+import com.example.practice.exceptionHandler.product.NoSuchProductException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +38,7 @@ public class OrderService {
     public OrderResponse getById(Long id) {
         Optional<Order> byId = orderRepository.findById(id);
         return byId.map(orderMapper::toOrderResponse)
-                .orElseThrow(() -> new NoSuchOrderException("Order with id=" + id
-                        + " not found"));
+                .orElseThrow(() -> new NoSuchOrderException("Заказ с таким айди не найден"));
     }
 
     public OrderResponse save(OrderCreateRequest request) {
@@ -67,7 +66,7 @@ public class OrderService {
 
     private OrderItem createOrderItem(OrderItemRequest orderItemRequest) {
         Product product = productRepository.findById(orderItemRequest.productId()).orElseThrow(() ->
-                new ProductNotFoundException("Продукт с таким айди не найден"));
+                new NoSuchProductException("Продукт с таким айди не найден"));
 
         OrderItem orderItem = new OrderItem();
         orderItem.setQuantity(orderItemRequest.quantity());

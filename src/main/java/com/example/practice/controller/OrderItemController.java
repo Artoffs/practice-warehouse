@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Возможно все-таки это и не нужный контроллер
+
 @RestController
 @RequestMapping("/api/orderitems")
 @RequiredArgsConstructor

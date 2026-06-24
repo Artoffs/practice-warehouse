@@ -3,6 +3,7 @@ package com.example.practice.service;
 import com.example.practice.dao.ShipmentRepository;
 import com.example.practice.dto.shipment.ShipmentProjection;
 import com.example.practice.entity.Shipment;
+import com.example.practice.exceptionHandler.shipment.NoSuchShipmentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ public class ShipmentService {
 
     public Shipment getById(Long id) {
         Optional<Shipment> byId = shipmentRepository.findById(id);
-        return byId.orElseThrow();
+        return byId.orElseThrow(() ->
+                new NoSuchShipmentException("Доставки с таким айди не найдено"));
     }
 }

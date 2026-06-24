@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice(basePackages = "com.example.practice.controller")
-public class ProductGlobalExceptionHandler {
+public class ProductExceptionHandler {
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ProductIncorrectData> handleException(ProductNotFoundException e) {
+    @ExceptionHandler
+    public ResponseEntity<ProductIncorrectData> handleException(NoSuchProductException e) {
         ProductIncorrectData data = new ProductIncorrectData();
         data.setInfo(e.getMessage());
         return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);

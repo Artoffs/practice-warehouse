@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class OrderGlobalExceptionHandler {
+public class OrderExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<OrderIncorrectData> handleException(NoSuchOrderException e) {
-        OrderIncorrectData orderInvalidData = new OrderIncorrectData();
-        orderInvalidData.setInfo(e.getMessage());
-        return new ResponseEntity<>(orderInvalidData, HttpStatus.BAD_REQUEST);
+        OrderIncorrectData data = new OrderIncorrectData();
+        data.setInfo(e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(data);
     }
 
 }

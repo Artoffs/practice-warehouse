@@ -7,7 +7,7 @@ import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.ProductRequest;
 import com.example.practice.dto.product.ProductResponse;
 import com.example.practice.entity.Product;
-import com.example.practice.exceptionHandler.product.ProductNotFoundException;
+import com.example.practice.exceptionHandler.product.NoSuchProductException;
 import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,9 +26,8 @@ public class ProductService {
 
     public ProductResponse getById(Long id) {
         Optional<Product> byId = productRepository.findById(id);
-        return byId.map(productMapper::toResponse).orElseThrow(() -> new ProductNotFoundException("Product with id="
-                + id +
-                " not found"));
+        return byId.map(productMapper::toResponse).orElseThrow(() ->
+                new NoSuchProductException("Продукт с указанным айди не найден"));
     }
 
 
