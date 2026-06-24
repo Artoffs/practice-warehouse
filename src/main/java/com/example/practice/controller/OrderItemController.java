@@ -1,6 +1,6 @@
 package com.example.practice.controller;
 
-import com.example.practice.dto.OrderItemProjection;
+import com.example.practice.dto.order.orderitem.OrderItemProjection;
 import com.example.practice.entity.OrderItem;
 import com.example.practice.service.OrderItemService;
 import lombok.RequiredArgsConstructor;

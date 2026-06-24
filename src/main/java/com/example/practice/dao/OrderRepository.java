@@ -1,20 +1,22 @@
 package com.example.practice.dao;
 
+import com.example.practice.dto.order.OrderProjection;
 import com.example.practice.entity.Order;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    @Query("SELECT DISTINCT o FROM Order o " +
-            "JOIN FETCH o.shipment s " +
-            "JOIN FETCH s.pickUpPoint pp " +
-            "JOIN FETCH o.orderItems oi " +
-            "JOIN FETCH oi.product p " +
-            "JOIN FETCH p.supplier sup")
-    List<Order> findAllWithAllDependencies();
+    @Query("""
+        SELECT new com.example.practice.dto.order.OrderProjection (
+            o.id, o.totalPrice, s.status, s.createdAt, pick.address)
+            FROM Order o
+            JOIN o.shipment s
+            JOIN s.pickUpPoint pick
+        """)
+    Page<OrderProjection> findAllProjections(Pageable pageable);
 }

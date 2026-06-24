@@ -1,11 +1,13 @@
 package com.example.practice.service;
 
 import com.example.practice.dao.ShipmentRepository;
+import com.example.practice.dto.shipment.ShipmentProjection;
 import com.example.practice.entity.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,8 +20,8 @@ public class ShipmentService {
         this.shipmentRepository = shipmentRepository;
     }
 
-    public List<Shipment> getAll(){
-        return shipmentRepository.findAllWithDependencies();
+    public Page<ShipmentProjection> getAll(Pageable pageable){
+        return shipmentRepository.findAllProjections(pageable);
     }
 
     public Shipment getById(Long id) {

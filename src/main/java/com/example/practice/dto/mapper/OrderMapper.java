@@ -1,7 +1,7 @@
 package com.example.practice.dto.mapper;
 
-import com.example.practice.dto.order.OrderItemResponse;
 import com.example.practice.dto.order.OrderResponse;
+import com.example.practice.dto.order.orderitem.OrderItemResponse;
 import com.example.practice.entity.Order;
 import com.example.practice.entity.OrderItem;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class OrderMapper {
 
         return new OrderResponse(
                 itemResponses,
-                order.getTotalPrice().doubleValue()
+                order.getTotalPrice()
         );
     }
 

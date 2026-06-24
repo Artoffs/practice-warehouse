@@ -1,10 +1,14 @@
 package com.example.practice.controller;
 
 import com.example.practice.dto.order.OrderCreateRequest;
+import com.example.practice.dto.order.OrderProjection;
 import com.example.practice.dto.order.OrderResponse;
 import com.example.practice.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -30,8 +32,8 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponse> getAll() {
-        return orderService.getAll();
+    public Page<OrderProjection> getAll(@PageableDefault(size = 20)Pageable pageable) {
+        return orderService.getAll(pageable);
     }
 
     @PostMapping

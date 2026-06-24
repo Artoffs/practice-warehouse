@@ -1,4 +1,4 @@
-package com.example.practice.dto.order;
+package com.example.practice.dto.order.orderitem;
 
 public record OrderItemResponse(
         Long productId,

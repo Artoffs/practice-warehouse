@@ -1,5 +1,6 @@
 package com.example.practice.controller;
 
+import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.ProductRequest;
 import com.example.practice.dto.product.ProductResponse;
 import com.example.practice.entity.Product;
@@ -26,7 +27,7 @@ public class ProductController {
 
     // Потенциальная проблема с использованием номера страницы, которая не существует
     @GetMapping
-    public Page<Product> products(
+    public Page<ProductProjection> products(
             @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.ASC)
             Pageable pageable) {
         return productService.getAll(pageable);

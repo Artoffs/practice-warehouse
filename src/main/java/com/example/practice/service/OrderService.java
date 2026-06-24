@@ -5,14 +5,17 @@ import com.example.practice.dao.OrderRepository;
 import com.example.practice.dao.ProductRepository;
 import com.example.practice.dto.mapper.OrderMapper;
 import com.example.practice.dto.order.OrderCreateRequest;
-import com.example.practice.dto.order.OrderItemRequest;
+import com.example.practice.dto.order.OrderProjection;
 import com.example.practice.dto.order.OrderResponse;
+import com.example.practice.dto.order.orderitem.OrderItemRequest;
 import com.example.practice.entity.Order;
 import com.example.practice.entity.OrderItem;
 import com.example.practice.entity.Product;
 import com.example.practice.exceptionHandler.order.NoSuchOrderException;
 import com.example.practice.exceptionHandler.product.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,9 +31,8 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final OrderMapper orderMapper;
 
-    public List<OrderResponse> getAll(){
-        List<Order> allWithAllDependencies = orderRepository.findAllWithAllDependencies();
-        return orderMapper.toOrderResponseList(allWithAllDependencies);
+    public Page<OrderProjection> getAll(Pageable pageable){
+        return orderRepository.findAllProjections(pageable);
     }
 
     public OrderResponse getById(Long id) {

@@ -2,9 +2,10 @@ package com.example.practice.service;
 
 import com.example.practice.dao.ProductRepository;
 import com.example.practice.dao.SupplierRepository;
+import com.example.practice.dto.mapper.ProductMapper;
+import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.ProductRequest;
 import com.example.practice.dto.product.ProductResponse;
-import com.example.practice.dto.mapper.ProductMapper;
 import com.example.practice.entity.Product;
 import com.example.practice.exceptionHandler.product.ProductNotFoundException;
 import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
@@ -31,8 +32,8 @@ public class ProductService {
     }
 
 
-    public Page<Product> getAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<ProductProjection> getAll(Pageable pageable) {
+        return productRepository.findAllProjections(pageable);
     }
 
     public Product save(ProductRequest request) {
