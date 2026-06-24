@@ -40,13 +40,13 @@ public class Shipment {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Shipment shipment = (Shipment) o;
-        return Objects.equals(id, shipment.id);
+        if (this == o) return true;
+        if (!(o instanceof Shipment that)) return false;
+        return this.id != null && Objects.equals(this.id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return getClass().hashCode();
     }
 }

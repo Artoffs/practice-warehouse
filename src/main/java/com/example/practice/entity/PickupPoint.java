@@ -23,7 +23,7 @@ public class PickupPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "address")
+    @Column(name = "address", unique = true)
     private String address;
 
     public PickupPoint(String address) {
@@ -32,13 +32,13 @@ public class PickupPoint {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        PickupPoint that = (PickupPoint) o;
-        return Objects.equals(id, that.id) && Objects.equals(address, that.address);
+        if (this == o) return true;
+        if (!(o instanceof PickupPoint that)) return false;
+        return this.id != null && Objects.equals(this.id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, address);
+        return Objects.hash(address);
     }
 }

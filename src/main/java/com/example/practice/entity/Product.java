@@ -45,13 +45,13 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id);
+        if (this == o) return true;
+        if (!(o instanceof Product that)) return false;
+        return this.id != null && Objects.equals(this.id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, supplier, name, description, price);
+        return getClass().hashCode();
     }
 }
