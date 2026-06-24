@@ -3,9 +3,10 @@ package com.example.practice.service;
 import com.example.practice.dao.OrderItemRepository;
 import com.example.practice.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,8 @@ public class OrderItemService {
         return byId.orElseThrow();
     }
 
-    public List<OrderItem> getAll(){
-        return orderItemRepository.getAllWithDeps();
+    // Когда появятся дто перепишу с использованием дто
+    public Page<OrderItem> getAll(Pageable pageable){
+        return orderItemRepository.getAllWithDeps(pageable);
     }
 }
