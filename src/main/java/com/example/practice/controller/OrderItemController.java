@@ -1,6 +1,7 @@
 package com.example.practice.controller;
 
 import com.example.practice.entity.OrderItem;
+import com.example.practice.dto.OrderItemProjection;
 import com.example.practice.service.OrderItemService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +26,7 @@ public class OrderItemController {
     }
 
     @GetMapping("/orderitems")
-    public Page<OrderItem> orderItems(
+    public Page<OrderItemProjection> orderItems(
             @PageableDefault(size = 20, sort= "id", direction = Sort.Direction.DESC)
             Pageable pageable) {
         return orderItemService.getAll(pageable);
