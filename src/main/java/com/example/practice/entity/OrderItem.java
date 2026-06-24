@@ -33,7 +33,7 @@ public class OrderItem {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "price_at_shipment")
+    @Column(name = "price_at_shipment", updatable = false)
     private BigDecimal priceAtShipment;
 
     @Override
