@@ -1,5 +1,6 @@
 package com.example.practice.controller;
 
+import com.example.practice.dto.product.ProductRequest;
 import com.example.practice.dto.product.ProductResponse;
 import com.example.practice.entity.Product;
 import com.example.practice.service.ProductService;
