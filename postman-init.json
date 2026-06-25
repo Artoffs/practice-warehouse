@@ -1,0 +1,259 @@
+{
+  "info": {
+    "name": "Fill Database with Test Data",
+    "description": "Скрипт для наполнения БД тестовыми данными через REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "2. Создать Пункты выдачи",
+      "item": [
+        {
+          "name": "ПВЗ Москва",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"г. Москва, ул. Тверская, д. 15\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pickup-points",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pickup-points"]
+            }
+          }
+        },
+        {
+          "name": "ПВЗ Санкт-Петербург",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"г. Санкт-Петербург, Невский пр-т, д. 28\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pickuppoints",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pickup-points"]
+            }
+          }
+        },
+        {
+          "name": "ПВЗ Новосибирск",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"г. Новосибирск, ул. Ленина, д. 10\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pickup-points",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pickup-points"]
+            }
+          }
+        },
+        {
+          "name": "ПВЗ Екатеринбург",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"г. Екатеринбург, ул. Малышева, д. 5\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pickup-points",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pickup-points"]
+            }
+          }
+        },
+        {
+          "name": "ПВЗ Казань",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"г. Казань, ул. Баумана, д. 20\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/pickup-points",
+              "host": ["{{base_url}}"],
+              "path": ["api", "pickup-points"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Создать Поставщиков",
+      "item": [
+        {
+          "name": "Поставщик Электроника Плюс",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ООО \\\"Электроника Плюс\\\"\",\n  \"email\": \"info@eplus.ru\",\n  \"phone\": \"+7(495)111-22-33\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/suppliers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "suppliers"]
+            }
+          }
+        },
+        {
+          "name": "Поставщик Компьютерный Мир",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ЗАО \\\"Компьютерный Мир\\\"\",\n  \"email\": \"sales@compworld.ru\",\n  \"phone\": \"+7(812)444-55-66\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/suppliers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "suppliers"]
+            }
+          }
+        },
+        {
+          "name": "Поставщик Смарт Технолоджис",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ИП \\\"Смарт Технолоджис\\\"\",\n  \"email\": \"order@smarttech.ru\",\n  \"phone\": \"+7(383)777-88-99\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/suppliers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "suppliers"]
+            }
+          }
+        },
+        {
+          "name": "Поставщик Домашняя Техника",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"ООО \\\"Домашняя Техника\\\"\",\n  \"email\": \"info@hometech.ru\",\n  \"phone\": \"+7(343)222-33-44\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/suppliers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "suppliers"]
+            }
+          }
+        },
+        {
+          "name": "Поставщик Цифровые Решения",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"АО \\\"Цифровые Решения\\\"\",\n  \"email\": \"support@digisolve.ru\",\n  \"phone\": \"+7(843)555-66-77\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/suppliers",
+              "host": ["{{base_url}}"],
+              "path": ["api", "suppliers"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Создать Товары",
+      "item": [
+        {"name": "Смартфон Galaxy S23", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Смартфон Galaxy S23\",\n  \"description\": \"8/256 ГБ, AMOLED, 6.1\\\"\",\n  \"price\": 549.99,\n  \"supplierId\": 1\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Наушники Buds Pro", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Наушники Buds Pro\",\n  \"description\": \"Беспроводные, шумоподавление\",\n  \"price\": 89.99,\n  \"supplierId\": 1\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Ноутбук XPS 15", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Ноутбук XPS 15\",\n  \"description\": \"i7-12700H, 16GB, RTX 3050\",\n  \"price\": 1299.99,\n  \"supplierId\": 2\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Монитор 27\\\" 4K", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Монитор 27\\\" 4K\",\n  \"description\": \"IPS, 144Hz, HDR600\",\n  \"price\": 499.99,\n  \"supplierId\": 2\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Умная колонка Echo", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Умная колонка Echo\",\n  \"description\": \"Голосовой помощник, Bluetooth\",\n  \"price\": 49.99,\n  \"supplierId\": 3\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Фитнес-браслет Band 7", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Фитнес-браслет Band 7\",\n  \"description\": \"Пульсометр, шагомер, GPS\",\n  \"price\": 34.99,\n  \"supplierId\": 3\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Пылесос Robot X10", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Пылесос Robot X10\",\n  \"description\": \"Автономный, лазерная навигация\",\n  \"price\": 299.99,\n  \"supplierId\": 4\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Кофемашина Barista Pro", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Кофемашина Barista Pro\",\n  \"description\": \"Капсульная, давление 15 бар\",\n  \"price\": 179.99,\n  \"supplierId\": 4\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "Планшет Tab S9", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"Планшет Tab S9\",\n  \"description\": \"11\\\", 128GB, S Pen в комплекте\",\n  \"price\": 399.99,\n  \"supplierId\": 5\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}},
+        {"name": "SSD 1TB M.2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"name\": \"SSD 1TB M.2\",\n  \"description\": \"NVMe, чтение 7000 МБ/с\",\n  \"price\": 119.99,\n  \"supplierId\": 5\n}"}, "url": {"raw": "{{base_url}}/api/products", "host": ["{{base_url}}"], "path": ["api", "products"]}}}
+      ]
+    },
+    {
+      "name": "5. Создать Остатки на складе",
+      "item": [
+        {"name": "Stock 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 1,\n  \"quantity\": 15\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 2,\n  \"quantity\": 30\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 3", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 3,\n  \"quantity\": 8\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 4", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 4,\n  \"quantity\": 12\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 5", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 5,\n  \"quantity\": 25\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 6", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 6,\n  \"quantity\": 40\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 7", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 7,\n  \"quantity\": 6\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 8", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 8,\n  \"quantity\": 18\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 9", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 9,\n  \"quantity\": 10\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}},
+        {"name": "Stock 10", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"productId\": 10,\n  \"quantity\": 22\n}"}, "url": {"raw": "{{base_url}}/api/stocks", "host": ["{{base_url}}"], "path": ["api", "stocks"]}}}
+      ]
+    },
+    {
+      "name": "6. Создать Отгрузки (Shipments)",
+      "item": [
+        {"name": "Shipment 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 1,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-01-10\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 2,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-01-15\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 3", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 3,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-01-20\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 4", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 4,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-01-25\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 5", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 5,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-02-01\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 6", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 1,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-02-05\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 7", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 2,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-02-10\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}},
+        {"name": "Shipment 8", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"pickupPointId\": 3,\n  \"status\": \"CREATED\",\n  \"createdAt\": \"2026-02-15\"\n}"}, "url": {"raw": "{{base_url}}/api/shipments", "host": ["{{base_url}}"], "path": ["api", "shipments"]}}}
+      ]
+    },
+    {
+      "name": "7. Создать Заказы (Orders)",
+      "item": [
+        {"name": "Order 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 1,\n  \"totalPrice\": 789.98\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 2,\n  \"totalPrice\": 1349.98\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 3", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 3,\n  \"totalPrice\": 84.98\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 4", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 4,\n  \"totalPrice\": 499.99\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 5", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 5,\n  \"totalPrice\": 399.99\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 6", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 6,\n  \"totalPrice\": 1199.98\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 7", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 7,\n  \"totalPrice\": 179.99\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}},
+        {"name": "Order 8", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"shipmentId\": 8,\n  \"totalPrice\": 549.99\n}"}, "url": {"raw": "{{base_url}}/api/orders", "host": ["{{base_url}}"], "path": ["api", "orders"]}}}
+      ]
+    },
+    {
+      "name": "8. Добавить Товары в Заказы (Order Items)",
+      "item": [
+        {"name": "Order 1 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 1,\n  \"productId\": 1,\n  \"quantity\": 1,\n  \"priceAtShipment\": 549.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 1 - Item 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 1,\n  \"productId\": 2,\n  \"quantity\": 2,\n  \"priceAtShipment\": 89.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 2 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 2,\n  \"productId\": 3,\n  \"quantity\": 1,\n  \"priceAtShipment\": 1299.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 2 - Item 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 2,\n  \"productId\": 5,\n  \"quantity\": 1,\n  \"priceAtShipment\": 49.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 3 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 3,\n  \"productId\": 6,\n  \"quantity\": 2,\n  \"priceAtShipment\": 34.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 3 - Item 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 3,\n  \"productId\": 5,\n  \"quantity\": 1,\n  \"priceAtShipment\": 14.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 4 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 4,\n  \"productId\": 4,\n  \"quantity\": 1,\n  \"priceAtShipment\": 499.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 5 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 5,\n  \"productId\": 9,\n  \"quantity\": 1,\n  \"priceAtShipment\": 399.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 6 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 6,\n  \"productId\": 3,\n  \"quantity\": 1,\n  \"priceAtShipment\": 1199.98\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 6 - Item 2", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 6,\n  \"productId\": 8,\n  \"quantity\": 1,\n  \"priceAtShipment\": 0.00\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 7 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 7,\n  \"productId\": 8,\n  \"quantity\": 1,\n  \"priceAtShipment\": 179.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}},
+        {"name": "Order 8 - Item 1", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{\n  \"orderId\": 8,\n  \"productId\": 1,\n  \"quantity\": 1,\n  \"priceAtShipment\": 549.99\n}"}, "url": {"raw": "{{base_url}}/api/order-items", "host": ["{{base_url}}"], "path": ["api", "order-items"]}}}
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
