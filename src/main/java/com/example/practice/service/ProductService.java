@@ -1,16 +1,15 @@
 package com.example.practice.service;
 
 import com.example.practice.dao.ProductRepository;
-import com.example.practice.dao.SupplierRepository;
 import com.example.practice.dto.mapper.ProductMapper;
-import com.example.practice.dto.product.PatchProductRequest;
-import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.CreateProductRequest;
+import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.ProductResponse;
+import com.example.practice.dto.product.PutProductRequest;
 import com.example.practice.entity.Product;
 import com.example.practice.entity.Supplier;
-import com.example.practice.exceptionHandler.product.NoSuchProductException;
-import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
+import com.example.practice.exceptionHandler.InvalidReferenceException;
+import com.example.practice.exceptionHandler.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,13 +23,18 @@ import java.util.Optional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final SupplierRepository supplierRepository;
+    private final SupplierService supplierService;
     private final ProductMapper productMapper;
 
-    public ProductResponse getById(Long id) {
+
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
+    }
+
+    public ProductResponse findByIdOrThrow(Long id) {
         Optional<Product> byId = productRepository.findById(id);
         return byId.map(productMapper::toResponse).orElseThrow(() ->
-                new NoSuchProductException("Продукт с указанным айди не найден"));
+                new ResourceNotFoundException("Продукт", id));
     }
 
 
@@ -39,33 +43,46 @@ public class ProductService {
     }
 
     public ProductResponse save(CreateProductRequest request) {
-        supplierRepository.findById(
-                request.supplierId())
-                .orElseThrow(() -> new NoSuchSupplierException(
-                        "Поставщик с указанным айди не найден"
-                ));
+        Supplier supplier = supplierService.findById((request.supplierId()))
+                .orElseThrow(() ->
+                        new InvalidReferenceException("поставщик", request.supplierId()));
 
-        Product save = productRepository.save(productMapper.toEntity(request));
+        Product entity = productMapper.toEntity(request);
+
+        entity.setSupplier(supplier);
+
+        Product save = productRepository.save(entity);
+
         return productMapper.toResponse(save);
     }
 
     @Transactional
-    public ProductResponse update(Long id, PatchProductRequest request) {
+    public ProductResponse putProduct(Long id, PutProductRequest request) {
         Product product = productRepository.findById(id).orElseThrow(() ->
-                new NoSuchProductException("Продукт с указанным айди не найден"));
+                new ResourceNotFoundException("Продукт", id));
 
-        if (request.supplierId().isPresent()) {
-            Long supplierId = request.supplierId().get();
-            Supplier supplier = supplierRepository.findById(supplierId)
+
+        if (request.supplierId() != null) {
+            Supplier supplier = supplierService.findById(request.supplierId())
                     .orElseThrow(() ->
-                            new NoSuchSupplierException("Поставщик с указанным айди не найден"));
+                            new InvalidReferenceException("поставщик", request.supplierId()));
+
             product.setSupplier(supplier);
         }
 
-        request.name().ifPresent(product::setName);
-        request.description().ifPresent(product::setDescription);
-        request.price().ifPresent(product::setPrice);
+        if (request.name() != null) {
+            product.setName(request.name());
+        }
+
+        if (request.description() != null) {
+            product.setDescription(request.description());
+        }
+
+        if (request.price() != null) {
+            product.setPrice(request.price());
+        }
 
         return productMapper.toResponse(product);
     }
+
 }

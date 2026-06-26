@@ -1,10 +1,9 @@
 package com.example.practice.controller;
 
-import com.example.practice.dto.product.PatchProductRequest;
-import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.CreateProductRequest;
+import com.example.practice.dto.product.ProductProjection;
 import com.example.practice.dto.product.ProductResponse;
-import com.example.practice.entity.Product;
+import com.example.practice.dto.product.PutProductRequest;
 import com.example.practice.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/products")
@@ -34,7 +38,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductResponse getById(@PathVariable Long id) {
-        return productService.getById(id);
+        return productService.findByIdOrThrow(id);
     }
 
     @PostMapping
@@ -43,9 +47,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(save);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @Valid @RequestBody PatchProductRequest request) {
-        ProductResponse update = productService.update(id, request);
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @Valid @RequestBody PutProductRequest request) {
+        ProductResponse update = productService.putProduct(id, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(update);
     }
+
+
 }

@@ -2,10 +2,10 @@ package com.example.practice.service;
 
 import com.example.practice.dao.SupplierRepository;
 import com.example.practice.dto.mapper.SupplierMapper;
-import com.example.practice.dto.supplier.PatchSupplierRequest;
 import com.example.practice.dto.supplier.CreateSupplierRequest;
+import com.example.practice.dto.supplier.PatchSupplierRequest;
 import com.example.practice.entity.Supplier;
-import com.example.practice.exceptionHandler.supplier.NoSuchSupplierException;
+import com.example.practice.exceptionHandler.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,13 +20,18 @@ public class SupplierService {
     private final SupplierRepository supplierRepository;
     private final SupplierMapper supplierMapper;
 
-    public Supplier getById(Long id) {
-        Optional<Supplier> byId = supplierRepository.findById(id);
-        return byId.orElseThrow(() ->
-                new NoSuchSupplierException("Поставщик с таким айди не найден"));
+    // Для внутреннего использования
+    public Optional<Supplier> findById(Long id) {
+        return supplierRepository.findById(id);
     }
 
-    public List<Supplier> getAll() {
+    // Для гет метода
+    public Supplier findByIdOrThrow(Long id) {
+        return findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Поставщик", id));
+    }
+
+    public List<Supplier> findAll() {
         return supplierRepository.findAll();
     }
 
@@ -36,8 +41,7 @@ public class SupplierService {
 
     @Transactional
     public Supplier update(Long id, PatchSupplierRequest request) {
-        Supplier supplier = supplierRepository.findById(id).orElseThrow(() ->
-                new NoSuchSupplierException("Поставщика с таким айди не найдено"));
+        Supplier supplier = findByIdOrThrow(id);
 
         if(request.name() != null) {
            supplier.setName(request.name());
@@ -51,4 +55,5 @@ public class SupplierService {
 
         return supplier;
     }
+
 }
