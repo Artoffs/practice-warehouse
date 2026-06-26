@@ -1,10 +1,12 @@
 ALTER TABLE shipment ALTER COLUMN status SET NOT NULL;
 ALTER TABLE shipment ALTER COLUMN pickup_point_id SET NOT NULL;
+ALTER TABLE shipment ALTER COLUMN created_at SET NOT NULL;
 
 ALTER TABLE product ALTER COLUMN supplier_id SET NOT NULL;
 ALTER TABLE product ALTER COLUMN name SET NOT NULL;
 
 ALTER TABLE stock ALTER COLUMN quantity SET NOT NULL;
+ALTER TABLE stock ALTER COLUMN product_id SET NOT NULL;
 
 ALTER TABLE customer_order ALTER COLUMN shipment_id SET NOT NULL;
 ALTER TABLE customer_order ALTER COLUMN total_price SET NOT NULL;
@@ -13,6 +15,8 @@ ALTER TABLE order_items ALTER COLUMN order_id SET NOT NULL;
 ALTER TABLE order_items ALTER COLUMN product_id SET NOT NULL;
 ALTER TABLE order_items ALTER COLUMN quantity SET NOT NULL;
 ALTER TABLE order_items ALTER COLUMN price_at_shipment SET NOT NULL;
+
+ALTER TABLE pickup_point ALTER COLUMN address SET NOT NULL;
 
 
 ALTER TABLE shipment DROP CONSTRAINT IF EXISTS shipment_pickup_point_id_fkey;
