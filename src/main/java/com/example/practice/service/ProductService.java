@@ -47,9 +47,7 @@ public class ProductService {
                 .orElseThrow(() ->
                         new InvalidReferenceException("поставщик", request.supplierId()));
 
-        Product entity = productMapper.toEntity(request);
-
-        entity.setSupplier(supplier);
+        Product entity = productMapper.toEntity(request, supplier);
 
         Product save = productRepository.save(entity);
 

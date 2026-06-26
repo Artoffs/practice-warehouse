@@ -3,21 +3,17 @@ package com.example.practice.service;
 import com.example.practice.dao.PickupPointRepository;
 import com.example.practice.entity.PickupPoint;
 import com.example.practice.exceptionHandler.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PickUpPointService {
 
     private final PickupPointRepository pickupPointRepository;
-
-    @Autowired
-    public PickUpPointService(PickupPointRepository pickupPointRepository) {
-        this.pickupPointRepository = pickupPointRepository;
-    }
 
     public PickupPoint findByIdOrThrow(Long id) {
         Optional<PickupPoint> byId = pickupPointRepository.findById(id);

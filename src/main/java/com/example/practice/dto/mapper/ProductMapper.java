@@ -5,11 +5,8 @@ import com.example.practice.dto.product.CreateProductRequest;
 import com.example.practice.dto.product.ProductResponse;
 import com.example.practice.entity.Product;
 import com.example.practice.entity.Supplier;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -26,14 +23,12 @@ public class ProductMapper {
                 product.getPrice().doubleValue());
     }
 
-    public Product toEntity(CreateProductRequest request) {
+    public Product toEntity(CreateProductRequest request, Supplier supplier) {
         Product product = new Product();
         product.setName(request.name());
         product.setDescription(request.description());
-        Supplier supplier = supplierRepository.findById(request.supplierId())
-                .orElseThrow(() -> new EntityNotFoundException("Supplier not found"));
         product.setSupplier(supplier);
-        product.setPrice(BigDecimal.valueOf(request.price()));
+        product.setPrice(request.price());
         return product;
     }
 }
