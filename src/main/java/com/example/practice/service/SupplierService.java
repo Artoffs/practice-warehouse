@@ -6,6 +6,9 @@ import com.example.practice.dto.supplier.CreateSupplierRequest;
 import com.example.practice.dto.supplier.PatchSupplierRequest;
 import com.example.practice.entity.Supplier;
 import com.example.practice.exceptionHandler.ResourceNotFoundException;
+import com.example.practice.kafka.KafkaEventProducer;
+import com.example.practice.kafka.KafkaTopics;
+import com.example.practice.kafka.event.SupplierCreatedEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ public class SupplierService {
 
     private final SupplierRepository supplierRepository;
     private final SupplierMapper supplierMapper;
+    private final KafkaEventProducer producer;
 
     // Для внутреннего использования
     public Optional<Supplier> findById(Long id) {
@@ -36,7 +40,15 @@ public class SupplierService {
     }
 
     public Supplier save(CreateSupplierRequest request) {
-        return supplierRepository.save(supplierMapper.toEntity(request));
+        Supplier save = supplierRepository.save(supplierMapper.toEntity(request));
+
+        producer.send(
+                KafkaTopics.TEST_TOPIC,
+                new SupplierCreatedEvent(save.getId(), save.getName()),
+                "supplier-created"
+        );
+
+        return save;
     }
 
     @Transactional

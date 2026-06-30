@@ -10,6 +10,9 @@ import com.example.practice.entity.Product;
 import com.example.practice.entity.Supplier;
 import com.example.practice.exceptionHandler.InvalidReferenceException;
 import com.example.practice.exceptionHandler.ResourceNotFoundException;
+import com.example.practice.kafka.KafkaEventProducer;
+import com.example.practice.kafka.KafkaTopics;
+import com.example.practice.kafka.event.ProductCreatedEvent;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,6 +28,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final SupplierService supplierService;
     private final ProductMapper productMapper;
+    private final KafkaEventProducer producer;
 
 
     public Optional<Product> findById(Long id) {
@@ -50,6 +54,11 @@ public class ProductService {
         Product entity = productMapper.toEntity(request, supplier);
 
         Product save = productRepository.save(entity);
+
+        ProductCreatedEvent productCreatedEvent =
+                new ProductCreatedEvent(save.getId(), save.getName(), save.getPrice());
+
+        producer.send(KafkaTopics.TEST_TOPIC, productCreatedEvent, "PRODUCT_CREATED");
 
         return productMapper.toResponse(save);
     }
