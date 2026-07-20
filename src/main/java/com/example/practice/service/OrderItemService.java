@@ -1,8 +1,9 @@
 package com.example.practice.service;
 
 import com.example.practice.dao.OrderItemRepository;
+import com.example.practice.dto.order.orderitem.OrderItemProjection;
 import com.example.practice.entity.OrderItem;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class OrderItemService {
     private final OrderItemRepository orderItemRepository;
 
-    @Autowired
-    public OrderItemService(OrderItemRepository orderItemRepository) {
-        this.orderItemRepository = orderItemRepository;
-    }
 
     public OrderItem getById(Long id) {
         Optional<OrderItem> byId = orderItemRepository.findById(id);
@@ -24,7 +22,7 @@ public class OrderItemService {
     }
 
     // Когда появятся дто перепишу с использованием дто
-    public Page<OrderItem> getAll(Pageable pageable){
-        return orderItemRepository.getAllWithDeps(pageable);
+    public Page<OrderItemProjection> getAll(Pageable pageable){
+        return orderItemRepository.findAllProjections(pageable);
     }
 }

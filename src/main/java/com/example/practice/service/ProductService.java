@@ -1,8 +1,17 @@
 package com.example.practice.service;
 
 import com.example.practice.dao.ProductRepository;
+import com.example.practice.dto.mapper.ProductMapper;
+import com.example.practice.dto.product.CreateProductRequest;
+import com.example.practice.dto.product.ProductProjection;
+import com.example.practice.dto.product.ProductResponse;
+import com.example.practice.dto.product.PutProductRequest;
 import com.example.practice.entity.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.practice.entity.Supplier;
+import com.example.practice.exceptionHandler.InvalidReferenceException;
+import com.example.practice.exceptionHandler.ResourceNotFoundException;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -10,21 +19,68 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final SupplierService supplierService;
+    private final ProductMapper productMapper;
 
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
     }
 
-    public Product getById(Long id) {
+    public ProductResponse findByIdOrThrow(Long id) {
         Optional<Product> byId = productRepository.findById(id);
-        return byId.orElseThrow();
+        return byId.map(productMapper::toResponse).orElseThrow(() ->
+                new ResourceNotFoundException("Продукт", id));
     }
 
-    public Page<Product> getAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+
+    public Page<ProductProjection> getAll(Pageable pageable) {
+        return productRepository.findAllProjections(pageable);
     }
+
+    public ProductResponse save(CreateProductRequest request) {
+        Supplier supplier = supplierService.findById((request.supplierId()))
+                .orElseThrow(() ->
+                        new InvalidReferenceException("поставщик", request.supplierId()));
+
+        Product entity = productMapper.toEntity(request, supplier);
+
+        Product save = productRepository.save(entity);
+
+        return productMapper.toResponse(save);
+    }
+
+    @Transactional
+    public ProductResponse putProduct(Long id, PutProductRequest request) {
+        Product product = productRepository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Продукт", id));
+
+
+        if (request.supplierId() != null) {
+            Supplier supplier = supplierService.findById(request.supplierId())
+                    .orElseThrow(() ->
+                            new InvalidReferenceException("поставщик", request.supplierId()));
+
+            product.setSupplier(supplier);
+        }
+
+        if (request.name() != null) {
+            product.setName(request.name());
+        }
+
+        if (request.description() != null) {
+            product.setDescription(request.description());
+        }
+
+        if (request.price() != null) {
+            product.setPrice(request.price());
+        }
+
+        return productMapper.toResponse(product);
+    }
+
 }
